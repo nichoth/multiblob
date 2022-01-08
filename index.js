@@ -113,7 +113,7 @@ module.exports = function Blobs (config) {
         else return true
       }))
         return cb(new Error('not a valid id:'+invalid))
-        
+
       cont.para(u.toArray(ids).map(test)) (function (err, ary) {
         //will give an error if any hash was invalid.
         if(err) cb(err)
@@ -232,7 +232,10 @@ module.exports = function Blobs (config) {
             return data
           }),
           Write(tmpfile, function (err) {
-            if(err) return cb(explain(err, 'could not write to tmpfile'))
+            if (err) {
+                console.log('errrrrrrr', err)
+              return cb(explain(err, 'could not write to tmpfile'))
+            }
 
             var _id = encode(hasher.digest, alg)
 
